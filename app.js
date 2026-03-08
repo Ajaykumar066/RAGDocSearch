@@ -8,9 +8,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check route
+const uploadRouter = require('./routers/upload');
+const chatRouter = require('./routers/chat');
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
+
+app.use('/api', uploadRouter);
+app.use('/api', chatRouter);
 
 module.exports = app;
